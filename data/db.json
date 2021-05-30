@@ -1,0 +1,22 @@
+{
+    "blogs": [
+        {
+            "title": "My First Blog",
+            "body": "Why do we use it?\nIt is a long established fact that a reader will be distracted if there are many articles on a web page to read.",
+            "author": "George",
+            "id": 1
+        },
+        {
+            "title": "Opening Party!",
+            "body": "Why do we use it?\nIt is a long established fact that a reader will be distracted if there are many articles on a web page to read.",
+            "author": "Me",
+            "id": 2
+        },
+        {
+            "title": "Goodby",
+            "body": "Why do we use it?\nIt is a long established fact that a reader will be distracted if there are many articles on a web page to read.",
+            "author": "George",
+            "id": 3
+        }
+    ]
+}

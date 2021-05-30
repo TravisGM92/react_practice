@@ -1,19 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import BlogList from './BlogList';
 
 const Home = () => {
-    const [name, setName] = useState('mario');
-    const [age, setAge] = useState(25);
+    const [blogs, setBlogs] = useState(null); {/* Called a 'hook'. First part is the defined state (variable name), second is the function. The 'null' is the default value */}
+    const [isPending, setIsPending] = useState(true);
+    const [count, setCount] = useState(0);
 
-    const handleClick = () => {
-        setName('luigi');
-        setAge(30);
-    }
+    useEffect(() => {
+        fetch('http://localhost:8000/blogs')
+            .then(res => {
+                return res.json();
+            })
+            .then((data) => {
+                setBlogs(data);
+                setIsPending(false);
+            })
+    }, []);
 
     return (
         <div className="home">
-            <h2>Home page</h2>
-            <p>{ name } is { age} years old</p>
-            <button onClick={ handleClick }>Click me</button>
+            { isPending && <div>Loading...</div>}
+
+            {blogs && <BlogList blogs={ blogs } title="All Blogs"/>} { /*user defined component */}
+            <div>
+                <button onClick={() => setCount(count + 1)}>Current value: { count }</button>
+            </div>
         </div>
     );
 }
