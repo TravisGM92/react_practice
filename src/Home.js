@@ -1,30 +1,16 @@
-import { useState, useEffect } from 'react';
 import BlogList from './BlogList';
+import useFetch from './useFetch';
 
 const Home = () => {
-    const [blogs, setBlogs] = useState(null); {/* Called a 'hook'. First part is the defined state (variable name), second is the function. The 'null' is the default value */}
-    const [isPending, setIsPending] = useState(true);
-    const [count, setCount] = useState(0);
-
-    useEffect(() => {
-        fetch('http://localhost:8000/blogs')
-            .then(res => {
-                return res.json();
-            })
-            .then((data) => {
-                setBlogs(data);
-                setIsPending(false);
-            })
-    }, []);
+    const { data: blogs, isPending, error } = useFetch('http://localhost:8000/blogs');
 
     return (
         <div className="home">
+            { error && <div>{ error }</div>}
+
             { isPending && <div>Loading...</div>}
 
             {blogs && <BlogList blogs={ blogs } title="All Blogs"/>} { /*user defined component */}
-            <div>
-                <button onClick={() => setCount(count + 1)}>Current value: { count }</button>
-            </div>
         </div>
     );
 }
